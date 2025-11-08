@@ -393,6 +393,22 @@ const ExpertQA = () => {
                   {question.answered && (
                     <>
                       <span>•</span>
-                      <span className="text-suc
+                      <span className="text-success">Answered</span>
+                    </>
+                  )}
+                </div>
+                {question.answered && (
+                  <div className="mt-2 p-3 bg-gray-700/50 rounded text-text-light/80">
+                    {question.answer}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
-... [FILE TRUNCATED - 491 chars omitted]
+export default ExpertQA;
