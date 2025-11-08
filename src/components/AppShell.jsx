@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { 
-  Home, 
-  Search, 
-  FileText, 
-  MessageCircle, 
-  Menu, 
+import {
+  Home,
+  Search,
+  FileText,
+  MessageCircle,
+  Menu,
   X,
   TrendingUp,
-  Shield
+  Shield,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const AppShell = ({ children, currentPage, setCurrentPage }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const navigate = useNavigate();
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    document.documentElement.classList.toggle('dark');
+  };
 
   const navigation = [
     { id: 'dashboard', name: 'Dashboard', icon: Home, path: '/' },
@@ -30,10 +38,10 @@ const AppShell = ({ children, currentPage, setCurrentPage }) => {
   };
 
   return (
-    <div className="min-h-screen bg-bg">
+    <div className="min-h-screen bg-bg dark:bg-gray-900">
       {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
@@ -41,16 +49,16 @@ const AppShell = ({ children, currentPage, setCurrentPage }) => {
 
       {/* Sidebar */}
       <div className={`
-        fixed inset-y-0 left-0 z-50 w-64 bg-surface border-r border-gray-800 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0
+        fixed inset-y-0 left-0 z-50 w-64 bg-surface dark:bg-gray-800 border-r border-gray-800 dark:border-gray-700 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
-        <div className="flex items-center justify-between h-16 px-6 border-b border-gray-800">
+        <div className="flex items-center justify-between h-16 px-6 border-b border-gray-800 dark:border-gray-700">
           <div className="flex items-center space-x-2">
             <TrendingUp className="h-8 w-8 text-primary" />
             <span className="text-xl font-bold text-gradient">DeFiPulse</span>
           </div>
           <button
-            className="lg:hidden p-2 text-text-light hover:text-primary"
+            className="lg:hidden p-2 text-text-light dark:text-gray-300 hover:text-primary"
             onClick={() => setSidebarOpen(false)}
           >
             <X className="h-5 w-5" />
@@ -67,9 +75,9 @@ const AppShell = ({ children, currentPage, setCurrentPage }) => {
                   onClick={() => handleNavigation(item)}
                   className={`
                     w-full flex items-center px-4 py-3 rounded-lg text-left transition-all duration-200
-                    ${currentPage === item.id 
-                      ? 'bg-primary/10 text-primary border border-primary/20' 
-                      : 'text-text-light hover:bg-gray-800 hover:text-primary'
+                    ${currentPage === item.id
+                      ? 'bg-primary/10 text-primary border border-primary/20'
+                      : 'text-text-light dark:text-gray-300 hover:bg-gray-800 dark:hover:bg-gray-700 hover:text-primary'
                     }
                   `}
                 >
@@ -82,12 +90,12 @@ const AppShell = ({ children, currentPage, setCurrentPage }) => {
         </nav>
 
         <div className="absolute bottom-6 left-4 right-4">
-          <div className="card p-4">
+          <div className="card p-4 bg-surface dark:bg-gray-800 border border-gray-800 dark:border-gray-700">
             <div className="flex items-center space-x-2 mb-2">
               <Shield className="h-5 w-5 text-primary" />
-              <span className="font-semibold">BSC Network</span>
+              <span className="font-semibold text-text-light dark:text-gray-300">BSC Network</span>
             </div>
-            <p className="text-sm text-text-light/70">
+            <p className="text-sm text-text-light/70 dark:text-gray-400">
               Connected to Binance Smart Chain for optimal DeFi insights
             </p>
           </div>
@@ -97,21 +105,27 @@ const AppShell = ({ children, currentPage, setCurrentPage }) => {
       {/* Main content */}
       <div className="lg:pl-64">
         {/* Header */}
-        <header className="h-16 bg-surface border-b border-gray-800 flex items-center justify-between px-6">
+        <header className="h-16 bg-surface dark:bg-gray-800 border-b border-gray-800 dark:border-gray-700 flex items-center justify-between px-6">
           <button
-            className="lg:hidden p-2 text-text-light hover:text-primary"
+            className="lg:hidden p-2 text-text-light dark:text-gray-300 hover:text-primary"
             onClick={() => setSidebarOpen(true)}
           >
             <Menu className="h-6 w-6" />
           </button>
 
           <div className="flex-1 lg:flex-none">
-            <h1 className="text-xl font-semibold text-text-light">
+            <h1 className="text-xl font-semibold text-text-light dark:text-gray-300">
               {navigation.find(nav => nav.id === currentPage)?.name || 'Dashboard'}
             </h1>
           </div>
 
           <div className="flex items-center space-x-4">
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 text-text-light dark:text-gray-300 hover:text-primary rounded-lg hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
+            >
+              {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </button>
             <ConnectButton />
           </div>
         </header>
