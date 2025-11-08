@@ -8,12 +8,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        'bg': 'hsl(240, 10%, 4%)',
-        'surface': 'hsl(240, 10%, 8%)',
+        'bg-light': 'hsl(0, 0%, 100%)',
+        'bg-dark': 'hsl(240, 10%, 4%)',
+        'surface-light': 'hsl(0, 0%, 98%)',
+        'surface-dark': 'hsl(240, 10%, 8%)',
         'primary': 'hsl(43, 96%, 50%)',
         'accent': 'hsl(43, 96%, 60%)',
-        'text-light': 'hsl(220, 15%, 85%)',
-        'text-dark': 'hsl(220, 15%, 25%)',
+        'text-light': 'hsl(220, 15%, 25%)',
+        'text-dark': 'hsl(220, 15%, 85%)',
         'success': 'hsl(140, 70%, 50%)',
         'warning': 'hsl(30, 90%, 50%)',
         'error': 'hsl(0, 70%, 50%)',
