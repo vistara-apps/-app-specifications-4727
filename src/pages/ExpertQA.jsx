@@ -8,7 +8,7 @@ import {
   Send,
   ThumbsUp,
   User,
-  Live,
+  Radio,
   Play,
   Lock,
   Plus
@@ -256,7 +256,7 @@ const ExpertQA = () => {
                     <div className="flex items-center space-x-3 mb-2">
                       <h3 className="text-xl font-semibold text-text-light">{session.title}</h3>
                       <div className={`flex items-center space-x-1 px-2 py-1 rounded-md border text-xs font-medium ${getStatusBg(session.status)}`}>
-                        {session.status === 'live' && <Live className="h-3 w-3" />}
+                        {session.status === 'live' && <Radio className="h-3 w-3" />}
                         <span className={getStatusColor(session.status)}>
                           {session.status.charAt(0).toUpperCase() + session.status.slice(1)}
                         </span>
@@ -313,7 +313,7 @@ const ExpertQA = () => {
                   )}
                   {session.status === 'live' && (
                     <button className="bg-error hover:bg-error/80 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                      <Live className="h-4 w-4 mr-2" />
+                      <Radio className="h-4 w-4 mr-2" />
                       Join Live
                     </button>
                   )}
@@ -393,22 +393,6 @@ const ExpertQA = () => {
                   {question.answered && (
                     <>
                       <span>•</span>
-                      <span className="text-success">Answered</span>
-                    </>
-                  )}
-                </div>
-                {question.answered && question.answer && (
-                  <div className="mt-3 p-3 bg-primary/5 border-l-2 border-primary rounded">
-                    <p className="text-text-light/80 text-sm">{question.answer}</p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
+                      <span className="text-suc
 
-export default ExpertQA;
+... [FILE TRUNCATED - 491 chars omitted]
